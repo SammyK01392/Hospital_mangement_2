@@ -4,62 +4,47 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Hospital_mangement_2</title>
+
+    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <!-- Site-specific CSS -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <!-- Optional custom styles -->
     <link rel="stylesheet" href="~/Hospital_mangement_2.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Hospital_mangement_2</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
-                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" href="@Url.Action("Index", "Home")">Hospital_mangement_2</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" href="@Url.Action("Index", "Home")">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" href="@Url.Action("Privacy", "Home")">Privacy</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Admissions" asp-action="Create">Record Patient Admission</a>
+                            <a class="nav-link text-dark" href="@Url.Action("Create", "Admissions")">Record Patient Admission</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Practitioners" asp-action="Index">Search Practitioners</a>
+                            <a class="nav-link text-dark" href="@Url.Action("Index", "Practitioners")">Search Practitioners</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Encounters" asp-action="Create">Log Patient Encounter</a>
+                            <a class="nav-link text-dark" href="@Url.Action("Create", "Encounters")">Log Patient Encounter</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-controller="Patients" asp-action="History">View Patient History</a>
+                            <a class="nav-link text-dark" href="@Url.Action("History", "Patients")">View Patient History</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-danger" asp-controller="Home" asp-action="Exit">Exit</a>
+                            <a class="nav-link text-danger" href="@Url.Action("Exit", "Home")">Exit</a>
                         </li>
                     </ul>
-                    <form method="get" action="@Url.Action("Index", "Practitioner")">
-                        <input type="text" name="name" placeholder="Search by name" value="@ViewBag.Name" />
-                        <input type="text" name="specialty" placeholder="Search by specialty" value="@ViewBag.Specialty" />
-                        <button type="submit">Search</button>
-                    </form>
-                    <form method="get" action="@Url.Action("Search", "Home")">
-                        <div>
-                            <label for="name">Hospital Name:</label>
-                            <input type="text" id="name" name="name" value="@ViewBag.Name" placeholder="Enter hospital name" />
-                        </div>
-                        <div>
-                            <label for="city">City:</label>
-                            <input type="text" id="city" name="city" value="@ViewBag.City" placeholder="Enter city name" />
-                        </div>
-                        <button type="submit">Search</button>
-                    </form>
-
-
-
                 </div>
             </div>
         </nav>
@@ -67,18 +52,47 @@
 
     <div class="container">
         <main role="main" class="pb-3">
+            <!-- Search Bar Section -->
+            <div class="row mb-3">
+                <div class="col-md-8 offset-md-2">
+                    <form method="get" action="@Url.Action("Index", "Practitioner")" class="d-flex">
+                        <div class="input-group">
+                            <input type="text" name="name" class="form-control" placeholder="Search by name" value="@ViewBag.Name" aria-label="Search by name" />
+                            <input type="text" name="specialty" class="form-control" placeholder="Search by specialty" value="@ViewBag.Specialty" aria-label="Search by specialty" />
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Second Search Bar (Hospital Name and City Search) -->
+            <div class="row mb-3">
+                <div class="col-md-8 offset-md-2">
+                    <form method="get" action="@Url.Action("Search", "Home")" class="d-flex">
+                        <div class="input-group">
+                            <input type="text" name="name" class="form-control" placeholder="Enter hospital name" value="@ViewBag.HospitalName" aria-label="Enter hospital name" />
+                            <input type="text" name="city" class="form-control" placeholder="Enter city name" value="@ViewBag.City" aria-label="Enter city name" />
+                            <button type="submit" class="btn btn-success">Search Hospitals</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- Render the rest of the body content -->
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Hospital_mangement_2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="footer border-top text-muted py-3">
+        <div class="container text-center">
+            &copy; 2025 - Hospital_mangement_2 - <a href="@Url.Action("Privacy", "Home")">Privacy</a>
         </div>
     </footer>
+
+    <!-- JavaScript Files -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- Optional Section for Extra Scripts -->
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

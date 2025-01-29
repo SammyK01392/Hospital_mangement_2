@@ -208,5 +208,49 @@ namespace Hospital_mangement_2.Controllers
             }
             return View();
         }
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(PatientLoginModel loginModel)
+        {
+            try
+            {
+                string loginData = JsonConvert.SerializeObject(loginModel);
+                StringContent content = new StringContent(loginData, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _client.PostAsync("https://localhost:7145/api/Patients/Login/", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string result = await response.Content.ReadAsStringAsync();
+                    var loginResponse = JsonConvert.DeserializeObject<dynamic>(result);
+
+                    string token = loginResponse?.Token;
+                    var user = loginResponse?.User;
+
+                    if (token != null)
+                    {
+                        TempData["success_message"] = "Login successful!";
+                        HttpContext.Session.SetString("JWT_Token", token); // Store JWT token in session
+                        return RedirectToAction("Index"); // Redirect to Index or another page
+                    }
+                }
+                else
+                {
+                    TempData["error_message"] = "Login failed. Please check your credentials.";
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["error_message"] = $"Error: {ex.Message}";
+            }
+
+            return View();
+        }
+
     }
 }

@@ -148,5 +148,8 @@ namespace Hospital_mangement_2.Controllers
             TempData["error_message"] = "Failed to delete practitioner.";
             return View();
         }
+        // Login - Post patient login credentials and get the JWT token
+        
+
     }
 }
