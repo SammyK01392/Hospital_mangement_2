@@ -1,0 +1,31 @@
+﻿@model List<Hospital>
+@{
+    ViewBag.Title = "Search Hospitals";
+}
+
+<h2>Search Hospitals</h2>
+
+
+
+<h3>Search Results</h3>
+
+@if (TempData["error_message"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["error_message"]
+    </div>
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    <ul>
+        @foreach (var hospital in Model)
+        {
+            <li>@hospital.Name - @hospital.City</li>
+        }
+    </ul>
+}
+else
+{
+    <p>No hospitals found matching your search.</p>
+}
