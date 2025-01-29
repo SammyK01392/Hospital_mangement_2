@@ -217,14 +217,14 @@ namespace Hospital_mangement_2.Controllers
         [HttpGet]
         public async Task<IActionResult> Search(string name, string city)
         {
-            // Add search parameters to ViewBag to preserve them in the search form
+           
             ViewBag.Name = name;
             ViewBag.City = city;
 
-            // Ensure at least one search parameter is provided
+            
             if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(city))
             {
-                return View(new List<Hospital>()); // Return an empty list if no query is provided
+                return View(new List<Hospital>()); 
             }
 
             List<Hospital> hospitals = new List<Hospital>();
@@ -266,8 +266,12 @@ namespace Hospital_mangement_2.Controllers
                 TempData["error_message"] = $"Error: {ex.Message}";
             }
 
-            return View(hospitals); // Only return searched hospitals
+            return View(hospitals); 
         }
+     
+
+       
+
 
 
         // Error handling

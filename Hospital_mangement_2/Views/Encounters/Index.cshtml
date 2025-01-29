@@ -4,74 +4,44 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-center my-4">Encounter List</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
-<table class="table">
-    <thead>
+
+<table class="table table-striped table-bordered table-hover">
+    <thead class="thead-dark">
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EncounterId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PatientId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PractitionerId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.HospitalId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EncounterDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EncounterType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Diagnosis)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Treatment)
-            </th>
-            <th></th>
+            <th>@Html.DisplayNameFor(model => model.EncounterId)</th>
+            <th>@Html.DisplayNameFor(model => model.PatientId)</th>
+            <th>@Html.DisplayNameFor(model => model.PractitionerId)</th>
+            <th>@Html.DisplayNameFor(model => model.HospitalId)</th>
+            <th>@Html.DisplayNameFor(model => model.EncounterDate)</th>
+            <th>@Html.DisplayNameFor(model => model.EncounterType)</th>
+            <th>@Html.DisplayNameFor(model => model.Diagnosis)</th>
+            <th>@Html.DisplayNameFor(model => model.Treatment)</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EncounterId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PatientId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PractitionerId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HospitalId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EncounterDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EncounterType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Diagnosis)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Treatment)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.EncounterId)</td>
+                <td>@Html.DisplayFor(modelItem => item.PatientId)</td>
+                <td>@Html.DisplayFor(modelItem => item.PractitionerId)</td>
+                <td>@Html.DisplayFor(modelItem => item.HospitalId)</td>
+                <td>@Html.DisplayFor(modelItem => item.EncounterDate)</td>
+                <td>@Html.DisplayFor(modelItem => item.EncounterType)</td>
+                <td>@Html.DisplayFor(modelItem => item.Diagnosis)</td>
+                <td>@Html.DisplayFor(modelItem => item.Treatment)</td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-warning btn-sm">Edit</a> |
+                    <a asp-action="Details" class="btn btn-info btn-sm">Details</a> |
+                    <a asp-action="Delete" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

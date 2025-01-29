@@ -1,37 +1,47 @@
 ﻿@model List<Hospital_mangement_2.Models.Practitioner>
 
 @{
-    ViewData["Title"] = "Practitioners";
+    ViewData["Title"] = "Practitioners List";
 }
 
 <h1>Practitioners</h1>
 
-
+<!-- Search Form -->
+<form method="get" action="@Url.Action("Index", "Practitioner")">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" name="searchQuery" placeholder="Search by name" value="@ViewBag.searchQuery" />
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+</form>
 
 <!-- Practitioner List -->
-<table>
-    <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Specialty</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var practitioner in Model)
-        {
+@if (Model != null && Model.Any())
+{
+    <table class="table table-bordered">
+        <thead>
             <tr>
-                <td>@practitioner.FirstName</td>
-                <td>@practitioner.LastName</td>
-                <td>@practitioner.Specialization</td>
-                <td>
-                    <a href="@Url.Action("Details", "Practitioner", new { id = practitioner.HospitalId })">Details</a> |
-                    <a href="@Url.Action("Edit", "Practitioner", new { id = practitioner.HospitalId })">Edit</a> |
-                    <a href="@Url.Action("Delete", "Practitioner", new { id = practitioner.HospitalId })">Delete</a>
-                </td>
+                <th>Name</th>
+                <th>Specialty</th>
+                <th>Actions</th>
             </tr>
-        }
-    </tbody>
-</table>
-
+        </thead>
+        <tbody>
+            @foreach (var practitioner in Model)
+            {
+                <tr>
+                    <td>@practitioner.FirstName</td>
+                    <td>@practitioner.Specialization</td>
+                    <td>
+                        <a href="@Url.Action("Details", "Practitioner", new { id = practitioner.HospitalId })">Details</a> |
+                        <a href="@Url.Action("Edit", "Practitioner", new { id = practitioner.HospitalId })">Edit</a> |
+                        <a href="@Url.Action("Delete", "Practitioner", new { id = practitioner.HospitalId })">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No practitioners found.</p>
+}
